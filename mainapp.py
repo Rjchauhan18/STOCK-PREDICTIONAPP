@@ -2,7 +2,6 @@ import yfinance as yf
 import pandas as pd
 import streamlit as st
 import datetime as dt
-from datetime import data
 import cufflinks as cf
 import matplotlib.pyplot as plt
 import plotly
