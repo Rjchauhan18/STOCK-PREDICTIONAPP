@@ -2,94 +2,17 @@ import yfinance as yf
 import pandas as pd
 import streamlit as st
 import datetime as dt
+from datetime import data
 import cufflinks as cf
 import matplotlib.pyplot as plt
 import plotly
 import plotly.graph_objects as go
-# from deta import Deta
 import pandas_profiling
 from streamlit_pandas_profiling import st_profile_report 
-# from dotenv import load_dotenv
-# import streamlit_authenticator as sa
-# from pathlib import Path
 from prophet import Prophet
-# import streamlit as st
-from deta import Deta
-# import database as db
-# import yaml 
-# from yaml.loader import SafeLoader
-import streamlit.components.v1 as components
-
-
-
-# import yfinance as yf
-# stock_info = yf.Ticker('TSLA').info
-# # stock_info.keys() for other properties you can explore
-# market_price = stock_info['regularMarketPrice']
-# previous_close_price = stock_info['regularMarketPreviousClose']
-# print('market price ', market_price)
-# print('previous close price ', previous_close_price)
-
-
-
-
-
-
-
-
-
-
 
 
 st.set_page_config(page_title="Stock Price Analysis" , page_icon=":bar_chart:", layout="wide")
-# 
-# 
-# streamlit_app.py
-# user authentication 
-
-
-# # Creating an update user details widget
-# if st.sidebar.button ('Sign Up'):
-#     if authentication_status:
-#         try:
-#             if authenticator.update_user_details(username, 'Update user details'):
-#                 st.success('Entries updated successfully')
-#         except Exception as e:
-#             st.error(e)
-
-
-
-
-
-
-
-
-
-# if authenticator == False:
-#    st.error("Username/password is incorrect")
-# 
-# if authenticator == None:
-#    st.warning("Please enter your username and password ")
-# 
-# if authenticator == True  :
-# 
-
-# if authentication_status == None :
-    
-
-#     st.warning('Please enter your username and password')
-
-# elif authentication_status == False:
-#     st.error('Username/password is incorrect')
-
-# if authentication_status == None or authentication_status==False :
-#     front = 'Log In'
-
-# else :
-#     front = 'Log out'
-
-#     if st.sidebar.button(front):
-#         authenticator.logout('Logout', 'main')
 
 
 
@@ -101,13 +24,8 @@ st.markdown(
 )
 st.write('---')
 # sidebar
-#authenticator.logout("Logout","sidebar")
-from datetime import date
-# today = date.today().strftime("%Y")
-# today1 = date.today().strftime("%m")
-# today2 = date.today().strftime("%d")
-# main_today = int(today+today1+today2)
-# st.write(today)
+
+
 with st.sidebar:
     st.sidebar.markdown(' # Stock Price Analysis ')
     st.sidebar.title(f"Welcome ")
@@ -136,13 +54,7 @@ if navigation == 'Home' :
     tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
     tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
-    # Ticker information
-    # string_logo = components.html("""'<img src=%s>' % tickerData.info['logo_url']""")
-    # st.markdown(string_logo, unsafe_allow_html=True)
-    # # for getting companys full name
-    # string_name = tickerData.info['longName']
-    # st.header('**%s**' % string_name)
-    # for getting information of company
+   
     string_summary = tickerData.info['longBusinessSummary']
     st.info(string_summary)
     # Ticker data
@@ -183,30 +95,7 @@ if navigation == 'Home' :
             title_text='Time Series data with Rangeslider', xaxis_rangeslider_visible=True)
         st.plotly_chart(fig , use_container_width=True)
     plot_raw_data()
-    # Predict forecast with Prophet.
-# 
-    # df_train = tickerDf[['date','Close']]
-    # df_train = df_train.rename(columns={"date": "ds", "Close": "y"})
-# 
-    # m = Prophet()
-    # m.fit(df_train)
-    # future = m.make_future_dataframe(periods=(start_date - End_date))
-    # forecast = m.predict(future)
-# 
-    # Show and plot forecast
-    # st.subheader('Forecast data')
-    # st.write(forecast.tail())
-    # n_years = st.slider('Years of prediction:', 1, 4)
-# period = n_years * 365
-# st.write(f'Forecast plot for {n_years} years')
-# fig1  = m.plot(forecast)
-# st.plotly_chart(fig1)
-#
-# st.write("Forecast components")
-# fig2 = m.plot_components(forecast)
-# st.write(fig2)
-#describe the bollinger band on the graph
-  
+
 # -------------------------------------------------------------PROFILING THE STOCK DATA : -------------------------------------------------------------------
 if  navigation == 'Stock Report' :
     company_name = tickerData.info['longName']
