@@ -55,7 +55,7 @@ if navigation == 'Home' :
     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
    
 #     string_summary = tickerData.info['longBusinessSummary']
-    st.info(string_summary)
+#     st.info(string_summary)
     # Ticker data
     st.header('**Stock data**')
     st.table(tickerDf)
