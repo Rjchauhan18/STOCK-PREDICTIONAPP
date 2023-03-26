@@ -63,9 +63,9 @@ st.set_page_config(page_title="Stock Price Analysis" , page_icon=":bar_chart:", 
 
 
 
-def data(symbol,period,timeframe,start_date, end_date):
+def data(symbol,period,timeframe,st_date, ed_date):
     tickerData = yf.Ticker(symbol)
-    tickerDf= tickerData.history(period=period,interval=timeframe,start=start_date,end=end_date)
+    tickerDf= tickerData.history(period=period,interval=timeframe,start=st_date,end=ed_date)
     return tickerDf
 
 
