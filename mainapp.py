@@ -63,10 +63,10 @@ st.set_page_config(page_title="Stock Price Analysis" , page_icon=":bar_chart:", 
 
 
 
-def data(symbol,period,timeframe,st_date, ed_date):
-    tickerData = yf.Ticker(symbol)
-    tickerDf= tickerData.history(period=period,interval=timeframe,start=st_date,end=ed_date)
-    return tickerDf
+# def data(symbol,period,timeframe,st_date, ed_date):
+#     tickerData = yf.Ticker(symbol)
+#     tickerDf= tickerData.history(period=period,interval=timeframe,start=st_date,end=ed_date)
+#     return tickerDf
 
 
 
@@ -140,7 +140,7 @@ with st.sidebar:
     # Select ticker symbol
     tickerSymbol = st.sidebar.selectbox('Stock ticker', ticker_list) 
     # Get ticker data
-#     tickerData = yf.Ticker(tickerSymbol) 
+    tickerData = yf.Ticker(tickerSymbol) 
     #pandas profiling 
     navigation = st.radio('Navigation',['Home','Stock Report','Range Of the day','Community']) 
 # ---------------------------------------------------------HOME MENU :---------------------------------------------------
@@ -151,8 +151,10 @@ if navigation == 'Home' :
     # get the historical prices for this ticke
 #     st.write(tickerData)
 #     tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
-    tickerDf = data(tickerSymbol,'1d','5m',start_date,End_date)
-    st.write(tickerDf)
+#     tickerDf = data(tickerSymbol,'1d','5m',start_date,End_date)
+
+      tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
+      st.write(tickerDf)
 #     tickerDf.reset_index(inplace=True)
 #     #coverting time zone to date :
 #     tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
