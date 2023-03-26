@@ -104,7 +104,7 @@ st.markdown(
 st.write('---')
 # sidebar
 #authenticator.logout("Logout","sidebar")
-from datetime import date
+# from datetime import date
 # today = date.today().strftime("%Y")
 # today1 = date.today().strftime("%m")
 # today2 = date.today().strftime("%d")
@@ -131,8 +131,7 @@ with st.sidebar:
     ticker_list = ('TATASTEEL.NS', 'TCS.NS', 'HDFCLIFE.NS', 'WIPRO.NS', 'EICHERMOT.NS', 'INFY.NS', 'MARUTI.NS', 'TECHM.NS', 'BRITANNIA.NS', 'HCLTECH.NS', 'MM.NS', 'BAJAJ-AUTO.NS', 'SBIN.NS', 'HINDUNILVR.NS', 'DRREDDY.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'JSWSTEEL.NS', 'TATASTEEL.NS', 'NTPC.NS', 'POWERGRID.NS', 'COALINDIA.NS', 'BHARTIARTL.NS', 'SBILIFE.NS',
                 'ONGC.NS', 'BAJFINANCE.NS', 'ULTRACEMCO.NS', 'SUNPHARMA.NS', 'ADANIENT.NS', 'LT.NS', 'BAJAJFINSV.NS', 'UPL.NS', 'ADANIPORTS.NS', 'CIPLA.NS', 'HINDALCO.NS', 'BPCL.NS', 'NESTLEIND.NS', 'KOTAKBANK.NS', 'HDFCBANK.NS', 'RELIANCE.NS', 'APOLLOHOSP.NS', 'HDFC.NS', 'DIVISLAB.NS', 'GRASIM.NS', 'TITAN.NS', 'ITC.NS', 'ASIANPAINT.NS', 'HEROMOTOCO.NS')
     # Select ticker symbol
-    tickerSymbol = st.sidebar.selectbox(
-        'Stock ticker', ticker_list) 
+    tickerSymbol = st.sidebar.selectbox('Stock ticker', ticker_list) 
     # Get ticker data
     tickerData = yf.Ticker(tickerSymbol) 
     #pandas profiling 
@@ -143,7 +142,9 @@ if navigation == 'Home' :
 
 
     # get the historical prices for this ticke
+    st.write(tickerData)
     tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
+    st.table(tickerDf)
     tickerDf.reset_index(inplace=True)
     #coverting time zone to date :
     tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
