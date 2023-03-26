@@ -3,7 +3,7 @@ import os
 import yfinance as yf
 import pandas as pd
 import streamlit as st
-import datetime as dt
+from datetime import datetime , date,timedelta
 import cufflinks as cf
 import matplotlib.pyplot as plt
 import plotly
@@ -113,8 +113,20 @@ from datetime import date
 with st.sidebar:
     st.sidebar.markdown(' # Stock Price Analysis ')
     st.sidebar.title(f"Welcome ")
-    start_date = st.sidebar.date_input("start date", dt.date(2021, 1, 1))
-    End_date = st.sidebar.date_input("End date",dt.date(2022,1,1)) 
+    # get current datetime
+    dt = datetime.now()
+        
+    DAY = dt.strftime('%A')
+   
+    if DAY == 'Saturday' or DAY == 'Sunday':
+        Start_date =  date.today() - timedelta(days=3)
+        end_date = date.today() - timedelta(days=2)
+    else:
+        Start_date = date.today()
+        end_date = date.today() + timedelta(days=1)
+
+    start_date = st.sidebar.date_input("start date", Start_date)
+    End_date = st.sidebar.date_input("End date",end_date) 
     # Retrieving tickers data
     ticker_list = ('TATASTEEL.NS', 'TCS.NS', 'HDFCLIFE.NS', 'WIPRO.NS', 'EICHERMOT.NS', 'INFY.NS', 'MARUTI.NS', 'TECHM.NS', 'BRITANNIA.NS', 'HCLTECH.NS', 'MM.NS', 'BAJAJ-AUTO.NS', 'SBIN.NS', 'HINDUNILVR.NS', 'DRREDDY.NS', 'ICICIBANK.NS', 'INDUSINDBK.NS', 'JSWSTEEL.NS', 'TATASTEEL.NS', 'NTPC.NS', 'POWERGRID.NS', 'COALINDIA.NS', 'BHARTIARTL.NS', 'SBILIFE.NS',
                 'ONGC.NS', 'BAJFINANCE.NS', 'ULTRACEMCO.NS', 'SUNPHARMA.NS', 'ADANIENT.NS', 'LT.NS', 'BAJAJFINSV.NS', 'UPL.NS', 'ADANIPORTS.NS', 'CIPLA.NS', 'HINDALCO.NS', 'BPCL.NS', 'NESTLEIND.NS', 'KOTAKBANK.NS', 'HDFCBANK.NS', 'RELIANCE.NS', 'APOLLOHOSP.NS', 'HDFC.NS', 'DIVISLAB.NS', 'GRASIM.NS', 'TITAN.NS', 'ITC.NS', 'ASIANPAINT.NS', 'HEROMOTOCO.NS')
