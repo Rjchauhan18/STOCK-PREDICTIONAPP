@@ -153,13 +153,13 @@ if navigation == 'Home' :
 #     tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
     tickerDf = data(tickerSymbol,'1d','5m',start_date,End_date)
     st.write(tickerDf)
-    tickerDf.reset_index(inplace=True)
-    #coverting time zone to date :
-    tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
-    tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
-    tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
-    tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
-    # Ticker information
+#     tickerDf.reset_index(inplace=True)
+#     #coverting time zone to date :
+#     tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
+#     tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
+#     tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
+#     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
+#     # Ticker information
     # string_logo = components.html("""'<img src=%s>' % tickerData.info['logo_url']""")
     # st.markdown(string_logo, unsafe_allow_html=True)
     # # for getting companys full name
