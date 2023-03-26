@@ -151,7 +151,7 @@ if navigation == 'Home' :
     # get the historical prices for this ticke
 #     st.write(tickerData)
 #     tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
-    data(tickerSymbol,'1d','5m',start_date,End_date)
+    tickerDf = data(tickerSymbol,'1d','5m',start_date,End_date)
     st.write(tickerDf)
     tickerDf.reset_index(inplace=True)
     #coverting time zone to date :
