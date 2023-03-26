@@ -63,6 +63,13 @@ st.set_page_config(page_title="Stock Price Analysis" , page_icon=":bar_chart:", 
 
 
 
+def data(symbol,period,timeframe,start_date, end_date):
+    tickerData = yf.Ticker(symbol)
+    tickerDf= tickerData.history(period=period,interval=timeframe,start=start_date,end=end_date)
+    return tickerDf
+
+
+
 
 
 
@@ -133,7 +140,7 @@ with st.sidebar:
     # Select ticker symbol
     tickerSymbol = st.sidebar.selectbox('Stock ticker', ticker_list) 
     # Get ticker data
-    tickerData = yf.Ticker(tickerSymbol) 
+#     tickerData = yf.Ticker(tickerSymbol) 
     #pandas profiling 
     navigation = st.radio('Navigation',['Home','Stock Report','Range Of the day','Community']) 
 # ---------------------------------------------------------HOME MENU :---------------------------------------------------
@@ -142,8 +149,9 @@ if navigation == 'Home' :
 
 
     # get the historical prices for this ticke
-    st.write(tickerData)
-    tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
+#     st.write(tickerData)
+#     tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
+    data(tickerSymbol,'1d','5m',start_date,End_date)
     st.table(tickerDf)
     tickerDf.reset_index(inplace=True)
     #coverting time zone to date :
