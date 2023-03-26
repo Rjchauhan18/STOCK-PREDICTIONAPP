@@ -152,7 +152,7 @@ if navigation == 'Home' :
 #     st.write(tickerData)
 #     tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
     data(tickerSymbol,'1d','5m',start_date,End_date)
-    st.table(tickerDf)
+    st.write(tickerDf)
     tickerDf.reset_index(inplace=True)
     #coverting time zone to date :
     tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
