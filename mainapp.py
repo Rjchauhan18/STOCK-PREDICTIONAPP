@@ -140,7 +140,7 @@ with st.sidebar:
     # Select ticker symbol
     tickerSymbol = st.sidebar.selectbox('Stock ticker', ticker_list) 
     # Get ticker data
-    tickerData = yf.Ticker(tickerSymbol) 
+#     tickerData = yf.Ticker(tickerSymbol) 
     #pandas profiling 
     navigation = st.radio('Navigation',['Home','Stock Report','Range Of the day','Community']) 
 # ---------------------------------------------------------HOME MENU :---------------------------------------------------
@@ -173,10 +173,12 @@ if navigation == 'Home' :
     st.write(start_date)
     
     st.write(End_date)
+    tickerData = yf.Ticker(tickerSymbol)
+#     tickerDf= tickerData.history(period=period,interval=timeframe,start=st_date,end=ed_date)
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
-    infy_volume = tickerDf.groupby([tickerDf.index.year, tickerDf.index.month]).Volume.sum()
-    infy_volume.index = infy_volume.index.rename('Month', level=1)
-    st.write(infy_volume)
+#     infy_volume = tickerDf.groupby([tickerDf.index.year, tickerDf.index.month]).Volume.sum()
+#     infy_volume.index = infy_volume.index.rename('Month', level=1)
+#     st.write(infy_volume)
     st.write(tickerDf)
 #     tickerDf.reset_index(inplace=True)
 #     #coverting time zone to date :
