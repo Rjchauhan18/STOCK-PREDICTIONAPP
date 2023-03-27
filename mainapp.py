@@ -174,7 +174,9 @@ if navigation == 'Home' :
     
     st.write(End_date)
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
-    tickerDf.groupby(tickerDf.index.year).Volume.sum().reset_index() 
+    infy_volume = tickerDf.groupby([tickerDf.index.year, tickerDf.index.month]).Volume.sum()
+    infy_volume.index = infy_volume.index.rename('Month', level=1)
+    st.write(infy_volume)
     st.write(tickerDf)
 #     tickerDf.reset_index(inplace=True)
 #     #coverting time zone to date :
