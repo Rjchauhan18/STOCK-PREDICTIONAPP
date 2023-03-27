@@ -160,6 +160,7 @@ if navigation == 'Home' :
     # Ticker data
     tickerData = yf.Ticker(tickerSymbol)
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
+    st.write(tickerDf)
     
     tickerDf.index = tickerDf.index.tz_localize(None)
 
@@ -206,8 +207,10 @@ if navigation == 'Home' :
     
     Day = 5 * 365
     st_d = End_date - timedelta(days=Day)
+    st.write(st_d)
+    st.write(End_date)
     pre_data = tickerData.history(period='1d',start=st_d,end=End_date)
-    st.write(pre_data)
+    st.table(pre_data)
  
     
     pre_data.index = pre_data.index.tz_localize(None)
