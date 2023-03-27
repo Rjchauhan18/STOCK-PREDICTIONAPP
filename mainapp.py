@@ -153,8 +153,7 @@ if navigation == 'Home' :
 #     tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
 #     tickerDf = data(tickerSymbol,'1d','5m',start_date,End_date)
 
-     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
-     st.write(tickerDf)
+    
 #     tickerDf.reset_index(inplace=True)
 #     #coverting time zone to date :
 #     tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
@@ -171,6 +170,8 @@ if navigation == 'Home' :
     # string_summary = tickerData.info['longBusinessSummary']
     # st.info(string_summary)
     # Ticker data
+    tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
+    st.write(tickerDf)
     st.header('**Stock data**')
     st.table(tickerDf)
     # 
