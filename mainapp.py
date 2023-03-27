@@ -217,9 +217,9 @@ if navigation == 'Home' :
     #plot the graph
     def plot_raw_data():
         fig = go.Figure()
-        fig.add_trace(go.Scatter( x=tickerDf['Date'], y=tickerDf['Open'], name="stock_open"))
+        fig.add_trace(go.Scatter( x=tickerDf['date'], y=tickerDf['Open'], name="stock_open"))
         fig.add_trace(go.Scatter(
-            x=tickerDf['Date'], y=tickerDf['Close'], name="stock_close"))
+            x=tickerDf['date'], y=tickerDf['Close'], name="stock_close"))
         fig.layout.update(
             title_text='Time Series data with Rangeslider', xaxis_rangeslider_visible=True)
         st.plotly_chart(fig , use_container_width=True)
