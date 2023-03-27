@@ -140,27 +140,14 @@ with st.sidebar:
                 'ONGC.NS', 'BAJFINANCE.NS', 'ULTRACEMCO.NS', 'SUNPHARMA.NS', 'ADANIENT.NS', 'LT.NS', 'BAJAJFINSV.NS', 'UPL.NS', 'ADANIPORTS.NS', 'CIPLA.NS', 'HINDALCO.NS', 'BPCL.NS', 'NESTLEIND.NS', 'KOTAKBANK.NS', 'HDFCBANK.NS', 'RELIANCE.NS', 'APOLLOHOSP.NS', 'HDFC.NS', 'DIVISLAB.NS', 'GRASIM.NS', 'TITAN.NS', 'ITC.NS', 'ASIANPAINT.NS', 'HEROMOTOCO.NS')
     # Select ticker symbol
     tickerSymbol = st.sidebar.selectbox('Stock ticker', ticker_list) 
-    # Get ticker data
-#     tickerData = yf.Ticker(tickerSymbol) 
-    #pandas profiling 
+
+    #Navigation of app 
     navigation = st.radio('Navigation',['Home','Stock Report','Range Of the day','Community']) 
 # ---------------------------------------------------------HOME MENU :---------------------------------------------------
 if navigation == 'Home' :
 
 
 
-    # get the historical prices for this ticke
-#     st.write(tickerData)
-#     tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
-#     tickerDf = data(tickerSymbol,'1d','5m',start_date,End_date)
-
-    
-#     tickerDf.reset_index(inplace=True)
-#     #coverting time zone to date :
-#     tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
-#     tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
-#     tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
-#     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
 #     # Ticker information
     # string_logo = components.html("""'<img src=%s>' % tickerData.info['logo_url']""")
     # st.markdown(string_logo, unsafe_allow_html=True)
@@ -175,7 +162,7 @@ if navigation == 'Home' :
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
     
     tickerDf.index = tickerDf.index.tz_localize(None)
-    st.write(tickerDf)
+
     tickerDf.reset_index(inplace=True)
     #coverting time zone to date :
     tickerDf['Year'] = tickerDf['Datetime'].apply(lambda x:str(x)[-4:])
@@ -184,9 +171,7 @@ if navigation == 'Home' :
     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
     st.header('**Stock data**')
     st.table(tickerDf)
-    # 
-    # dividends
-    # dividends = tickerDf.Dividends
+    
     dividend,download = st.columns(2)
     with dividend :
       if st.button('BOLLINGER BAND'):
@@ -218,14 +203,21 @@ if navigation == 'Home' :
         st.plotly_chart(fig , use_container_width=True)
     plot_raw_data()
     # Predict forecast with Prophet.
-# 
-#     st.write(tickerDf)
+    
+    Day = 5 * 365
+    st_d = End_date - timedelta(days=Day)
+    pre_data = tickerData.history(period='1d',start=st_d,end=End_date)
+    
+    pre_data.index = pre_data.index.tz_localize(None)
+    st.table(pre_data)
     df_train = tickerDf[['Datetime','Close']]
-    st.table(df_train)
+
     df_train.rename(columns={"Datetime": "ds", "Close": "y"},inplace=True)
 
     m = Prophet()
     m.fit(df_train)
+   
+    
     n_years = st.slider('Years of prediction:', 1, 4)
     period = n_years * 365
     st.write(f'Forecast plot for {n_years} years')
