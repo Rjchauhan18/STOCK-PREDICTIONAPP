@@ -160,7 +160,7 @@ if navigation == 'Home' :
     # Ticker data
     tickerData = yf.Ticker(tickerSymbol)
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
-    st.write(tickerDf)
+
     
     tickerDf.index = tickerDf.index.tz_localize(None)
 
