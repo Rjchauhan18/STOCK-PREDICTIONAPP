@@ -209,6 +209,13 @@ if navigation == 'Home' :
     pre_data = tickerData.history(period='1d',start=st_d,end=End_date)
     
     pre_data.index = pre_data.index.tz_localize(None)
+    pre_data.reset_index(inplace=True)
+    #coverting time zone to date :
+    pre_data['Year'] = pre_data['Datetime'].apply(lambda x:str(x)[-4:])
+    pre_data['Month'] = pre_data['Datetime'].apply(lambda x:str(x)[-6:-4:])
+    pre_data['Day'] = pre_data['Datetime'].apply(lambda x:str(x)[-6:])
+    pre_data['date'] = pd.DataFrame(pre_data['Year'] +'-' +pre_data['Month'] +'-' + pre_data['Day'])
+ 
     st.table(pre_data)
     df_train = tickerDf[['Datetime','Close']]
 
