@@ -215,6 +215,8 @@ if navigation == 'Home' :
     plot_raw_data()
     # Predict forecast with Prophet.
 # 
+    tickerDf.index = tickerDf.index.tz_localize(None)
+    st.write(tickerDf)
     df_train = tickerDf[['date','Close']]
     st.table(df_train)
     df_train.rename(columns={"date": "ds", "Close": "y"},inplace=True)
