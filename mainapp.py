@@ -170,23 +170,18 @@ if navigation == 'Home' :
     # string_summary = tickerData.info['longBusinessSummary']
     # st.info(string_summary)
     # Ticker data
-    st.write(start_date)
-    st.write(tickerSymbol)
-    st.write(End_date)
+    
     tickerData = yf.Ticker(tickerSymbol)
-    st.write(tickerData)
+   
 #     tickerDf= tickerData.history(period=period,interval=timeframe,start=st_date,end=ed_date)
-    tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
-#     infy_volume = tickerDf.groupby([tickerDf.index.year, tickerDf.index.month]).Volume.sum()
-#     infy_volume.index = infy_volume.index.rename('Month', level=1)
-#     st.write(infy_volume)
+    tickerDf = tickerData.history(period='1d', start=start_date, end=End_date)
     st.write(tickerDf)
-#     tickerDf.reset_index(inplace=True)
-#     #coverting time zone to date :
-#     tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
-#     tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
-#     tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
-#     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
+    tickerDf.reset_index(inplace=True)
+    #coverting time zone to date :
+    tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
+    tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
+    tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
+    tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
     st.header('**Stock data**')
     st.table(tickerDf)
     # 
