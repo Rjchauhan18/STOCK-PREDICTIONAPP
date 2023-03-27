@@ -223,29 +223,29 @@ if navigation == 'Home' :
         fig.layout.update(
             title_text='Time Series data with Rangeslider', xaxis_rangeslider_visible=True)
         st.plotly_chart(fig , use_container_width=True)
-#     plot_raw_data()
+    plot_raw_data()
     # Predict forecast with Prophet.
 # 
-    # df_train = tickerDf[['date','Close']]
-    # df_train = df_train.rename(columns={"date": "ds", "Close": "y"})
-# 
-    # m = Prophet()
-    # m.fit(df_train)
-    # future = m.make_future_dataframe(periods=(start_date - End_date))
-    # forecast = m.predict(future)
-# 
-    # Show and plot forecast
-    # st.subheader('Forecast data')
-    # st.write(forecast.tail())
-    # n_years = st.slider('Years of prediction:', 1, 4)
-# period = n_years * 365
-# st.write(f'Forecast plot for {n_years} years')
-# fig1  = m.plot(forecast)
-# st.plotly_chart(fig1)
-#
-# st.write("Forecast components")
-# fig2 = m.plot_components(forecast)
-# st.write(fig2)
+    df_train = tickerDf[['date','Close']]
+    df_train = df_train.rename(columns={"date": "ds", "Close": "y"})
+
+    m = Prophet()
+    m.fit(df_train)
+    future = m.make_future_dataframe(periods=(start_date - End_date))
+    forecast = m.predict(future)
+
+#     Show and plot forecast
+    st.subheader('Forecast data')
+    st.write(forecast.tail())
+    n_years = st.slider('Years of prediction:', 1, 4)
+    period = n_years * 365
+    st.write(f'Forecast plot for {n_years} years')
+    fig1  = m.plot(forecast)
+    st.plotly_chart(fig1)
+
+    st.write("Forecast components")
+    fig2 = m.plot_components(forecast)
+    st.write(fig2)
 #describe the bollinger band on the graph
   
 # -------------------------------------------------------------PROFILING THE STOCK DATA : -------------------------------------------------------------------
