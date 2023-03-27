@@ -181,12 +181,12 @@ if navigation == 'Home' :
 #     infy_volume.index = infy_volume.index.rename('Month', level=1)
 #     st.write(infy_volume)
     st.write(tickerDf)
-#     tickerDf.reset_index(inplace=True)
-#     #coverting time zone to date :
-#     tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
-#     tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
-#     tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
-#     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
+    tickerDf.reset_index(inplace=True)
+    #coverting time zone to date :
+    tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
+    tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
+    tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
+    tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
     st.header('**Stock data**')
     st.table(tickerDf)
     # 
