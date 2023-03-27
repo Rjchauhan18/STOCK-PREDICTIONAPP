@@ -211,7 +211,7 @@ if navigation == 'Home' :
  
     
     pre_data.index = pre_data.index.tz_localize(None)
-     st.write(pre_data)
+    st.write(pre_data)
     
     pre_data.reset_index(inplace=True)
     #coverting time zone to date :
