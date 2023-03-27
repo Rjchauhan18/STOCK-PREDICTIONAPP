@@ -170,6 +170,9 @@ if navigation == 'Home' :
     # string_summary = tickerData.info['longBusinessSummary']
     # st.info(string_summary)
     # Ticker data
+    st.write(start_date)
+    
+    st.write(End_date)
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
     st.write(tickerDf)
     tickerDf.reset_index(inplace=True)
