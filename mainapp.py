@@ -15,6 +15,7 @@ from streamlit_pandas_profiling import st_profile_report
 # import streamlit_authenticator as sa
 # from pathlib import Path
 from prophet import Prophet
+from prophet.plot import plot_plotly 
 # import streamlit as st
 # from deta import Deta
 # import database as db
@@ -234,7 +235,9 @@ if navigation == 'Home' :
 #     Show and plot forecast
     st.subheader('Forecast data')
     st.table(forecast.tail())
-    fig1  = m.plot(forecast)
+#     fig1  = m.plot(forecast)
+    
+    fig1  =plot_plotly(m, forecast)
     st.plotly_chart(fig1)
 
     st.write("Forecast components")
