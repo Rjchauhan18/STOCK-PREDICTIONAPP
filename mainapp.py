@@ -170,17 +170,8 @@ if navigation == 'Home' :
     # string_summary = tickerData.info['longBusinessSummary']
     # st.info(string_summary)
     # Ticker data
-    st.write(start_date)
-    st.write(tickerSymbol)
-    st.write(End_date)
     tickerData = yf.Ticker(tickerSymbol)
-    st.write(tickerData)
-#     tickerDf= tickerData.history(period=period,interval=timeframe,start=st_date,end=ed_date)
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
-#     infy_volume = tickerDf.groupby([tickerDf.index.year, tickerDf.index.month]).Volume.sum()
-#     infy_volume.index = infy_volume.index.rename('Month', level=1)
-#     st.write(infy_volume)
-    st.write(tickerDf)
     tickerDf.reset_index(inplace=True)
     #coverting time zone to date :
     tickerDf['Year'] = tickerDf['Datetime'].apply(lambda x:str(x)[-4:])
@@ -227,7 +218,7 @@ if navigation == 'Home' :
     # Predict forecast with Prophet.
 # 
     df_train = tickerDf[['date','Close']]
-    df_train = df_train.rename(columns={"date": "ds", "Close": "y"})
+    df_train = df_train.rename(columns={"date": "ds", "Close": "y"},inplace=True)
 
     m = Prophet()
     m.fit(df_train)
