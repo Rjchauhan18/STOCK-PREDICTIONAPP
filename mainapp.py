@@ -208,16 +208,16 @@ if navigation == 'Home' :
     #plot the graph
     def plot_raw_data():
         fig = go.Figure()
-        fig.add_trace(go.Scatter( x=tickerDf['date'], y=tickerDf['Open'], name="stock_open"))
-        fig.add_trace(go.Scatter(x=tickerDf['date'], y=tickerDf['Close'], name="stock_close"))
+        fig.add_trace(go.Scatter( x=tickerDf['Datetime'], y=tickerDf['Open'], name="stock_open"))
+        fig.add_trace(go.Scatter(x=tickerDf['Datetime'], y=tickerDf['Close'], name="stock_close"))
         fig.layout.update(title_text='Time Series data with Rangeslider', xaxis_rangeslider_visible=True)
         st.plotly_chart(fig , use_container_width=True)
     plot_raw_data()
     # Predict forecast with Prophet.
 # 
-    df_train = tickerDf[['date','Close']]
+    df_train = tickerDf[['Datetime','Close']]
     st.table(df_train)
-    df_train.rename(columns={"date": "ds", "Close": "y"},inplace=True)
+    df_train.rename(columns={"Datetime": "ds", "Close": "y"},inplace=True)
 
     m = Prophet()
     m.fit(df_train)
