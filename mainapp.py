@@ -225,18 +225,15 @@ if navigation == 'Home' :
 
     m = Prophet()
     m.fit(df_train)
-    n_year = st.slider("Select Year",1,4)
-    period = n_year *  365
-    future = m.make_future_dataframe(periods=period)
-    forecast = m.predict(future)
-    st.table(forecast)
-
-#     Show and plot forecast
-    st.subheader('Forecast data')
-    st.write(forecast.tail())
     n_years = st.slider('Years of prediction:', 1, 4)
     period = n_years * 365
     st.write(f'Forecast plot for {n_years} years')
+    future = m.make_future_dataframe(periods=period)
+    forecast = m.predict(future)
+
+#     Show and plot forecast
+    st.subheader('Forecast data')
+    st.table(forecast.tail())
     fig1  = m.plot(forecast)
     st.plotly_chart(fig1)
 
