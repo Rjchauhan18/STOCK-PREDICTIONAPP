@@ -218,7 +218,7 @@ if navigation == 'Home' :
     plot_raw_data()
     # Predict forecast with Prophet.
 # 
-    st.write(tickerDf)
+#     st.write(tickerDf)
     df_train = tickerDf[['Datetime','Close']]
     st.table(df_train)
     df_train.rename(columns={"Datetime": "ds", "Close": "y"},inplace=True)
@@ -229,6 +229,7 @@ if navigation == 'Home' :
     period = n_year *  365
     future = m.make_future_dataframe(periods=period)
     forecast = m.predict(future)
+    st.table(forecast)
 
 #     Show and plot forecast
     st.subheader('Forecast data')
