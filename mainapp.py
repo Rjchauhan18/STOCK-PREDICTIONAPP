@@ -172,6 +172,8 @@ if navigation == 'Home' :
     # Ticker data
     tickerData = yf.Ticker(tickerSymbol)
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
+    
+    tickerDf.index = tickerDf.index.tz_localize(None)
     tickerDf.reset_index(inplace=True)
     #coverting time zone to date :
     tickerDf['Year'] = tickerDf['Datetime'].apply(lambda x:str(x)[-4:])
@@ -215,7 +217,6 @@ if navigation == 'Home' :
     plot_raw_data()
     # Predict forecast with Prophet.
 # 
-    tickerDf.index = tickerDf.index.tz_localize(None)
     st.write(tickerDf)
     df_train = tickerDf[['date','Close']]
     st.table(df_train)
