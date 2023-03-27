@@ -207,9 +207,11 @@ if navigation == 'Home' :
     Day = 5 * 365
     st_d = End_date - timedelta(days=Day)
     pre_data = tickerData.history(period='1d',start=st_d,end=End_date)
+     st.write(pre_data)
  
     
     pre_data.index = pre_data.index.tz_localize(None)
+     st.write(pre_data)
     
     pre_data.reset_index(inplace=True)
     #coverting time zone to date :
@@ -217,7 +219,7 @@ if navigation == 'Home' :
     pre_data['Month'] = pre_data['Datetime'].apply(lambda x:str(x)[-6:-4:])
     pre_data['Day'] = pre_data['Datetime'].apply(lambda x:str(x)[-6:])
     pre_data['date'] = pd.DataFrame(pre_data['Year'] +'-' +pre_data['Month'] +'-' + pre_data['Day'])
-    st.write(pre_data)
+   
  
     st.table(pre_data)
     
