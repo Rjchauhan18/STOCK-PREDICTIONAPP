@@ -218,7 +218,7 @@ if navigation == 'Home' :
     # Predict forecast with Prophet.
 # 
     df_train = tickerDf[['date','Close']]
-    st.write(df_train)
+    st.table(df_train)
     df_train.rename(columns={"date": "ds", "Close": "y"},inplace=True)
 
     m = Prophet()
