@@ -174,12 +174,13 @@ if navigation == 'Home' :
     tickerDf = tickerData.history(period='1d',interval='5m', start=start_date, end=End_date)
     
     tickerDf.index = tickerDf.index.tz_localize(None)
-#     tickerDf.reset_index(inplace=True)
-#     #coverting time zone to date :
-#     tickerDf['Year'] = tickerDf['Datetime'].apply(lambda x:str(x)[-4:])
-#     tickerDf['Month'] = tickerDf['Datetime'].apply(lambda x:str(x)[-6:-4:])
-#     tickerDf['Day'] = tickerDf['Datetime'].apply(lambda x:str(x)[-6:])
-#     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
+    st.write(tickerDf)
+    tickerDf.reset_index(inplace=True)
+    #coverting time zone to date :
+    tickerDf['Year'] = tickerDf['Datetime'].apply(lambda x:str(x)[-4:])
+    tickerDf['Month'] = tickerDf['Datetime'].apply(lambda x:str(x)[-6:-4:])
+    tickerDf['Day'] = tickerDf['Datetime'].apply(lambda x:str(x)[-6:])
+    tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
     st.header('**Stock data**')
     st.table(tickerDf)
     # 
