@@ -207,7 +207,7 @@ if navigation == 'Home' :
     Day = 5 * 365
     st_d = End_date - timedelta(days=Day)
     pre_data = tickerData.history(period='1d',start=st_d,end=End_date)
-     st.write(pre_data)
+    st.write(pre_data)
  
     
     pre_data.index = pre_data.index.tz_localize(None)
