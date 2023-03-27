@@ -225,7 +225,9 @@ if navigation == 'Home' :
 
     m = Prophet()
     m.fit(df_train)
-    future = m.make_future_dataframe(periods=(start_date - End_date))
+    n_year = st.slider("Select Year",1,4)
+    period = n_year *  365
+    future = m.make_future_dataframe(periods=period)
     forecast = m.predict(future)
 
 #     Show and plot forecast
