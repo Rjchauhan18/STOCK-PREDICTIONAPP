@@ -183,9 +183,9 @@ if navigation == 'Home' :
     st.write(tickerDf)
     tickerDf.reset_index(inplace=True)
     #coverting time zone to date :
-    tickerDf['Year'] = tickerDf['Date'].apply(lambda x:str(x)[-4:])
-    tickerDf['Month'] = tickerDf['Date'].apply(lambda x:str(x)[-6:-4:])
-    tickerDf['Day'] = tickerDf['Date'].apply(lambda x:str(x)[-6:])
+    tickerDf['Year'] = tickerDf['Datetime'].apply(lambda x:str(x)[-4:])
+    tickerDf['Month'] = tickerDf['Datetime'].apply(lambda x:str(x)[-6:-4:])
+    tickerDf['Day'] = tickerDf['Datetime'].apply(lambda x:str(x)[-6:])
     tickerDf['date'] = pd.DataFrame(tickerDf['Year'] +'-' +tickerDf['Month'] +'-' + tickerDf['Day'])
     st.header('**Stock data**')
     st.table(tickerDf)
